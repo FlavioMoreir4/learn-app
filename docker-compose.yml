@@ -30,10 +30,10 @@ services:
     container_name: mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: leran-root
-      MYSQL_DATABASE: leran-db
-      MYSQL_USER: leran-user
-      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: learn_root
+      MYSQL_DATABASE: learn_db
+      MYSQL_USER: learn_user
+      MYSQL_PASSWORD: learn_pass
     ports:
       - "3306:3306"
     networks:
