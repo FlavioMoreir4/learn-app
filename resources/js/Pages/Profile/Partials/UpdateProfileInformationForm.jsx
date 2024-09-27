@@ -11,11 +11,12 @@ export default function UpdateProfileInformation({
     className = '',
 }) {
     const user = usePage().props.auth.user;
-
+    const roles = usePage().props.roles;
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             name: user.name,
             email: user.email,
+            role_id: user.role_id,
         });
 
     const submit = (e) => {
@@ -67,6 +68,25 @@ export default function UpdateProfileInformation({
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="role_id" value="Role" />
+
+                    <select
+                        id="role_id"
+                        className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200 dark:focus:border-indigo-500"
+                        value={data.role_id || ''}
+                        onChange={(e) => setData('role_id', e.target.value)}
+                        required
+                    >
+                        <option value="">Select role</option>
+                        {roles.map((role) => (
+                            <option key={role.id} value={role.id}>
+                                {role.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
